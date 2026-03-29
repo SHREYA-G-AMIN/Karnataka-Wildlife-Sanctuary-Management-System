@@ -1,0 +1,19 @@
+/* LOGOUT */
+.dashboard-container .logout {
+  margin-top: auto;
+  color: #ff6b6b;
+}
+
+.dashboard-container .logout:hover {
+  background: rgba(255,0,0,0.15);
+}
+
+/* BETTER FOOTER ALIGNMENT */
+.dashboard-container .main {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-container .footer {
+  margin-top: auto;
+}

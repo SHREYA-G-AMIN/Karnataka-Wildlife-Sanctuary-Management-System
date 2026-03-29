@@ -29,11 +29,19 @@ function Login() {
         }),
       });
 
-      const data = await res.json();
+      const raw = await res.text();
+      let data = null;
+      try {
+        data = raw ? JSON.parse(raw) : null;
+      } catch (parseErr) {
+        data = null;
+      }
+      console.log("Login response:", res.status, data ?? raw);
 
       if (res.ok) {
-        // store role (optional but useful)
-        localStorage.setItem("role", data.role);
+        // store user + role for dashboard guard
+        localStorage.setItem("user", username);
+        localStorage.setItem("role", data?.role || "user");
 
         // 🔀 Redirect based on role
         if (data.role === "admin") {
@@ -44,9 +52,10 @@ function Login() {
           navigate("/dashboard");
         }
       } else {
-        setError(data.message || "Invalid username or password");
+        setError((data && data.message) || `Login failed (${res.status})`);
       }
     } catch (err) {
+      console.error("Login request failed:", err);
       setError("Server not responding");
     }
 

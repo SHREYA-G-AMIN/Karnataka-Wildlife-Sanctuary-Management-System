@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
 /* 🌿 THEME */
 :root {
   --primary-green: #2e7d32;
@@ -146,7 +148,7 @@ body {
   cursor: not-allowed;
 }
 
-/* 📱 RESPONSIVE */
+/* RESPONSIVE */
 @media (max-width: 420px) {
   .login-card {
     width: 90%;
