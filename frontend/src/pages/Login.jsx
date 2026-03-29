@@ -18,30 +18,36 @@ function Login() {
     setLoading(true);
 
     try {
-      // 👉 Replace this URL with your backend
       const res = await fetch("http://localhost:5000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
       });
 
       const data = await res.json();
 
       if (res.ok) {
-        localStorage.setItem("token", data.token);
+        // store role (optional but useful)
         localStorage.setItem("role", data.role);
 
-        // Role-based navigation
-        if (data.role === "admin") navigate("/admin");
-        else if (data.role === "officer") navigate("/officer");
-        else navigate("/tourist");
+        // 🔀 Redirect based on role
+        if (data.role === "admin") {
+          navigate("/dashboard");
+        } else if (data.role === "officer") {
+          navigate("/dashboard");
+        } else {
+          navigate("/dashboard");
+        }
       } else {
-        setError(data.message || "Invalid credentials");
+        setError(data.message || "Invalid username or password");
       }
     } catch (err) {
-      setError("Server error. Please try again.");
+      setError("Server not responding");
     }
 
     setLoading(false);
@@ -50,13 +56,11 @@ function Login() {
   return (
     <div className="login-page">
       <div className="login-card">
-        {/* HEADER */}
         <h1>🌿 Karnataka Wildlife Parks</h1>
         <p className="tagline">
           Empowering Wildlife Conservation Through Data
         </p>
 
-        {/* FORM */}
         <form onSubmit={handleLogin}>
           {/* Username */}
           <div className="input-group">
@@ -88,10 +92,10 @@ function Login() {
             </span>
           </div>
 
-          {/* ERROR MESSAGE */}
+          {/* Error Message */}
           {error && <p className="error">{error}</p>}
 
-          {/* BUTTON */}
+          {/* Button */}
           <button type="submit" className="login-btn" disabled={loading}>
             {loading ? "Logging in..." : "Login"}
           </button>
