@@ -4,18 +4,25 @@ import { FaUserAlt, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import "../index.css";
 
 function Login() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
+
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address");
+      setLoading(false);
+      return;
+    }
 
     try {
       const res = await fetch("http://localhost:5000/login", {
@@ -24,7 +31,7 @@ function Login() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: username,
+          email: email,
           password: password,
         }),
       });
@@ -38,21 +45,11 @@ function Login() {
       }
       console.log("Login response:", res.status, data ?? raw);
 
-      if (res.ok) {
-        // store user + role for dashboard guard
-        localStorage.setItem("user", username);
-        localStorage.setItem("role", data?.role || "user");
-
-        //  Redirect based on role
-        if (data.role === "admin") {
-          navigate("/dashboard");
-        } else if (data.role === "officer") {
-          navigate("/dashboard");
-        } else {
-          navigate("/dashboard");
-        }
+      if (res.ok && data?.success) {
+        localStorage.setItem("user", email);
+        navigate("/welcome");
       } else {
-        setError((data && data.message) || `Login failed (${res.status})`);
+        setError((data && data.message) || "Invalid email or password");
       }
     } catch (err) {
       console.error("Login request failed:", err);
@@ -71,14 +68,14 @@ function Login() {
         </p>
 
         <form onSubmit={handleLogin}>
-          {/* Username */}
+          {/* Email */}
           <div className="input-group">
             <FaUserAlt className="icon" />
             <input
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
