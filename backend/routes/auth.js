@@ -17,10 +17,6 @@ const transporter = nodemailer.createTransport({
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(400).json({ success: false, message: "Missing fields" });
-  }
-
   db.query(
     "SELECT * FROM users WHERE email=? AND password=?",
     [email, password],
@@ -32,7 +28,7 @@ router.post("/login", (req, res) => {
       }
 
       if (!emailUser || !emailPass) {
-        console.warn("Email not configured: EMAIL_USER/EMAIL_PASS missing");
+        console.log("Email not configured: EMAIL_USER/EMAIL_PASS missing");
         return res.json({ success: true });
       }
 
@@ -41,10 +37,10 @@ router.post("/login", (req, res) => {
           from: emailUser,
           to: email,
           subject: "Login Successful",
-          text: "You have successfully logged into the Karnataka Wildlife Sanctuary Management System 🌿",
+          text: "You have successfully logged into the Karnataka Wildlife Sanctuary Management System \u{1F33F}",
         });
       } catch (mailErr) {
-        console.error("Email send failed:", mailErr);
+        console.log("Email send failed:", mailErr);
       }
 
       return res.json({ success: true });
@@ -53,3 +49,4 @@ router.post("/login", (req, res) => {
 });
 
 module.exports = router;
+
