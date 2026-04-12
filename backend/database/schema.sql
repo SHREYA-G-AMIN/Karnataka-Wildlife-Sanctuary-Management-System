@@ -36,7 +36,7 @@ INSERT INTO parks (name, location, area, famous, image, animals, species, endang
   45,
   10,
   5,
-  '[\"🚨 Poaching reported in Zone A\",\"🐅 Tiger treated for injury\",\"🐘 Elephant migration tracked\",\"🌿 New species recorded in Zone B\"]'
+  '[\"Poaching reported in Zone A\",\"Tiger treated for injury\",\"Elephant migration tracked\",\"New species recorded in Zone B\"]'
 ),
 (
   'Nagarhole National Park',
@@ -48,7 +48,7 @@ INSERT INTO parks (name, location, area, famous, image, animals, species, endang
   38,
   8,
   3,
-  '[\"🐆 Leopard spotted in Zone C\",\"🌿 Forest regeneration program started\",\"🚨 Illegal entry detected\"]'
+  '[\"Leopard spotted in Zone C\",\"Forest regeneration program started\",\"Illegal entry detected\"]'
 ),
 (
   'Kudremukh National Park',
@@ -60,7 +60,7 @@ INSERT INTO parks (name, location, area, famous, image, animals, species, endang
   35,
   6,
   2,
-  '[\"🌱 Plantation drive conducted\",\"🐾 Rare species sighted\"]'
+  '[\"Plantation drive conducted\",\"Rare species sighted\"]'
 ),
 (
   'Bannerghatta National Park',
@@ -72,7 +72,7 @@ INSERT INTO parks (name, location, area, famous, image, animals, species, endang
   30,
   5,
   2,
-  '[\"🦋 Butterfly park maintenance\",\"🦁 Lion enclosure upgraded\"]'
+  '[\"Butterfly park maintenance\",\"Lion enclosure upgraded\"]'
 ),
 (
   'Anshi National Park',
@@ -84,5 +84,5 @@ INSERT INTO parks (name, location, area, famous, image, animals, species, endang
   25,
   4,
   1,
-  '[\"🌳 Tree census completed\",\"🐾 Animal tracking ongoing\"]'
+  '[\"Tree census completed\",\"Animal tracking ongoing\"]'
 );

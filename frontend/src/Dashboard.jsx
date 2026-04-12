@@ -50,16 +50,16 @@ function Dashboard() {
 
       {/* SIDEBAR */}
       <div className="sidebar">
-        <h2 className="logo">?? Wildlife</h2>
+        <h2 className="logo">Wildlife</h2>
 
         <ul>
-  <li className="active">?? Dashboard</li>
-  <li>?? Species</li>
-  <li>?? Animals</li>
-  <li>????? Officers</li>
-  <li>?? Health</li>
-  <li>?? Poaching</li>
-  <li className="logout" onClick={() => { localStorage.removeItem("user"); localStorage.removeItem("role"); navigate("/login"); }}>?? Logout</li>
+  <li className="active">Dashboard</li>
+  <li>Species</li>
+  <li>Animals</li>
+  <li>Officers</li>
+  <li>Health</li>
+  <li>Poaching</li>
+  <li className="logout" onClick={() => { localStorage.removeItem("user"); localStorage.removeItem("role"); navigate("/login"); }}>Logout</li>
 </ul>
       </div>
 
@@ -68,7 +68,7 @@ function Dashboard() {
 
         {/* NAVBAR */}
         <div className="navbar">
-          <h2>?? Wildlife Management</h2>
+          <h2>Wildlife Management</h2>
 
           <select
             value={park}
@@ -99,38 +99,38 @@ function Dashboard() {
           </p>
 
           <div className="hero-details">
-            <span>?? {selectedPark?.location || "-"}</span>
-            <span>?? {selectedPark?.area || "-"}</span>
-            <span>?? {selectedPark?.famous || "-"}</span>
+            <span>{selectedPark?.location || "-"}</span>
+            <span>{selectedPark?.area || "-"}</span>
+            <span>{selectedPark?.famous || "-"}</span>
           </div>
         </div>
 
         {/* STATS */}
         <div className="stats">
           <div className="card">
-            <h3>?? Total Animals</h3>
+            <h3>Total Animals</h3>
             <p>{selectedPark?.animals ?? "-"}</p>
           </div>
 
           <div className="card">
-            <h3>?? Total Species</h3>
+            <h3>Total Species</h3>
             <p>{selectedPark?.species ?? "-"}</p>
           </div>
 
           <div className="card">
-            <h3>?? Endangered</h3>
+            <h3>Endangered</h3>
             <p>{selectedPark?.endangered ?? "-"}</p>
           </div>
 
           <div className="card">
-            <h3>?? Poaching Cases</h3>
+            <h3>Poaching Cases</h3>
             <p>{selectedPark?.poaching ?? "-"}</p>
           </div>
         </div>
 
         {/* ACTIVITY */}
         <div className="activity">
-          <h2>?? Recent Activity</h2>
+          <h2>Recent Activity</h2>
 
           {(selectedPark?.activity || []).map((item, index) => (
             <div key={index} className="activity-item">
