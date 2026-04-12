@@ -2,6 +2,74 @@ CREATE DATABASE wildlife_db;
 
 USE wildlife_db;
 
+CREATE TABLE Sanctuary (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  location VARCHAR(120) NOT NULL,
+  area VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Species (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  category VARCHAR(80) NOT NULL
+);
+
+CREATE TABLE Animals (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  species_id INT NOT NULL,
+  sanctuary_id INT NOT NULL,
+  age INT NOT NULL,
+  gender VARCHAR(20) NOT NULL,
+  health_status VARCHAR(50) NOT NULL,
+  FOREIGN KEY (species_id) REFERENCES Species(id),
+  FOREIGN KEY (sanctuary_id) REFERENCES Sanctuary(id)
+);
+
+CREATE TABLE Plants (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  type VARCHAR(80) NOT NULL,
+  sanctuary_id INT NOT NULL,
+  FOREIGN KEY (sanctuary_id) REFERENCES Sanctuary(id)
+);
+
+CREATE TABLE Forest_Officers (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  designation VARCHAR(80) NOT NULL,
+  experience INT NOT NULL,
+  sanctuary_id INT NOT NULL,
+  FOREIGN KEY (sanctuary_id) REFERENCES Sanctuary(id)
+);
+
+CREATE TABLE Conservation_Programs (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  start_date DATE NOT NULL,
+  status VARCHAR(50) NOT NULL,
+  sanctuary_id INT NOT NULL,
+  FOREIGN KEY (sanctuary_id) REFERENCES Sanctuary(id)
+);
+
+CREATE TABLE Poaching_Incidents (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  date DATE NOT NULL,
+  description TEXT NOT NULL,
+  sanctuary_id INT NOT NULL,
+  FOREIGN KEY (sanctuary_id) REFERENCES Sanctuary(id)
+);
+
+CREATE TABLE Tourist_Permits (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  visitor_name VARCHAR(120) NOT NULL,
+  date DATE NOT NULL,
+  sanctuary_id INT NOT NULL,
+  FOREIGN KEY (sanctuary_id) REFERENCES Sanctuary(id)
+);
+
+
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   email VARCHAR(100) NOT NULL,
