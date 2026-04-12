@@ -4,12 +4,9 @@ USE wildlife_db;
 
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  username VARCHAR(50),
-  password VARCHAR(50),
-  role VARCHAR(20)
+  email VARCHAR(100) NOT NULL,
+  password VARCHAR(100) NOT NULL
 );
 
-INSERT INTO users (username, password, role) VALUES
-('admin', '1234', 'admin'),
-('officer1', '1234', 'officer'),
-('tourist1', '1234', 'tourist');
+INSERT INTO users (email, password) VALUES
+('shreyagamin@gmail.com', '1234');
