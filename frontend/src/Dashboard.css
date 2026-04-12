@@ -180,6 +180,47 @@
   cursor: pointer;
 }
 
+/* ===== TABLE (ANIMALS) ===== */
+.dashboard-container .table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.dashboard-container .animals-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255,255,255,0.85);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.dashboard-container .animals-table thead th {
+  text-align: left;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  color: #0f172a;
+  background: #e8f3ec;
+  padding: 12px 14px;
+  position: sticky;
+  top: 0;
+}
+
+.dashboard-container .animals-table tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.dashboard-container .animals-table tbody tr:nth-child(even) {
+  background: rgba(15, 23, 42, 0.03);
+}
+
+.dashboard-container .animals-table tbody tr:hover {
+  background: rgba(76, 175, 80, 0.08);
+}
+
 /* ===== ANIMATIONS ===== */
 @keyframes fadeIn {
   from {
