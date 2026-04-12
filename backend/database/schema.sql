@@ -69,6 +69,13 @@ CREATE TABLE Tourist_Permits (
   FOREIGN KEY (sanctuary_id) REFERENCES Sanctuary(id)
 );
 
+INSERT INTO Sanctuary (id, name, location, area) VALUES
+(1, 'Bandipur National Park', 'Karnataka', '874 sq km'),
+(2, 'Nagarhole National Park', 'Karnataka', '643 sq km'),
+(3, 'Bannerghatta National Park', 'Bangalore', '260 sq km'),
+(4, 'Kudremukh National Park', 'Karnataka', '600 sq km'),
+(5, 'Anshi National Park', 'Karnataka', '340 sq km');
+
 
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
