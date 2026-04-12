@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Welcome from "./pages/Welcome";
+import Animals from "./pages/Animals";
 import Dashboard from "./Dashboard";
 
 
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/welcome" element={<Welcome />} />
+        <Route path="/animals" element={<Animals />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>

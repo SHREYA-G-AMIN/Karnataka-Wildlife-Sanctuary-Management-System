@@ -55,7 +55,7 @@ function Dashboard() {
         <ul>
   <li className="active">Dashboard</li>
   <li>Species</li>
-  <li>Animals</li>
+  <li onClick={() => navigate("/animals")}>Animals</li>
   <li>Officers</li>
   <li>Health</li>
   <li>Poaching</li>

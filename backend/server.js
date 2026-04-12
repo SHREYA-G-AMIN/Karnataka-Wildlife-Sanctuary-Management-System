@@ -11,8 +11,10 @@ app.use(express.json());
 // routes
 const authRoutes = require("./routes/auth");
 const parksRoutes = require("./routes/parks");
+const animalsRoutes = require("./routes/animals");
 app.use("/", authRoutes);
 app.use("/", parksRoutes);
+app.use("/", animalsRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Route not found" });
@@ -20,5 +22,5 @@ app.use((req, res) => {
 
 app.listen(5000, () => {
   console.log("Server running on port 5000");
-  console.log("Routes ready: POST /login, GET /parks");
+  console.log("Routes ready: POST /login, GET /parks, GET /animals");
 });
