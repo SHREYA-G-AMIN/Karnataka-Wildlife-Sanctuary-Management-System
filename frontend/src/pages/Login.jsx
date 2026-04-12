@@ -43,7 +43,7 @@ function Login() {
         localStorage.setItem("user", username);
         localStorage.setItem("role", data?.role || "user");
 
-        // 🔀 Redirect based on role
+        //  Redirect based on role
         if (data.role === "admin") {
           navigate("/dashboard");
         } else if (data.role === "officer") {
