@@ -72,9 +72,92 @@ CREATE TABLE Tourist_Permits (
 INSERT INTO Sanctuary (id, name, location, area) VALUES
 (1, 'Bandipur National Park', 'Karnataka', '874 sq km'),
 (2, 'Nagarhole National Park', 'Karnataka', '643 sq km'),
-(3, 'Bannerghatta National Park', 'Bangalore', '260 sq km'),
+(3, 'Bannerghatta National Park', 'Karnataka', '260 sq km'),
 (4, 'Kudremukh National Park', 'Karnataka', '600 sq km'),
-(5, 'Anshi National Park', 'Karnataka', '340 sq km');
+(5, 'Kali (Anshi) National Park', 'Karnataka', '340 sq km');
+
+INSERT INTO Species (id, name, category) VALUES
+(1, 'Tiger', 'Mammal'),
+(2, 'Elephant', 'Mammal'),
+(3, 'Leopard', 'Mammal'),
+(4, 'Sloth Bear', 'Mammal'),
+(5, 'Spotted Deer', 'Mammal'),
+(6, 'Peacock', 'Bird'),
+(7, 'Python', 'Reptile'),
+(8, 'Cobra', 'Reptile'),
+(9, 'Langur', 'Mammal'),
+(10, 'Wild Boar', 'Mammal');
+
+INSERT INTO Plants (name, type, sanctuary_id) VALUES
+('Teak', 'Tree', 1),
+('Bamboo', 'Grass', 1),
+('Sandalwood', 'Tree', 2),
+('Rosewood', 'Tree', 2),
+('Neem', 'Tree', 3),
+('Eucalyptus', 'Tree', 3),
+('Shola Grass', 'Grassland', 4),
+('Evergreen Forest Trees', 'Forest', 5);
+
+INSERT INTO Forest_Officers (name, designation, experience, sanctuary_id) VALUES
+('Ramesh Kumar', 'Forest Ranger', 12, 1),
+('Suresh Gowda', 'Forest Guard', 6, 1),
+('Anita Sharma', 'Deputy Conservator', 10, 2),
+('Vijay Rao', 'Range Officer', 14, 3),
+('Kiran Nayak', 'Forest Guard', 5, 4),
+('Meena Das', 'Wildlife Officer', 9, 5);
+
+INSERT INTO Conservation_Programs (name, start_date, status, sanctuary_id) VALUES
+('Project Tiger Initiative', '2020-01-01', 'Active', 1),
+('Project Elephant Program', '2019-06-15', 'Active', 2),
+('Habitat Restoration Drive', '2022-03-10', 'Ongoing', 3),
+('Biodiversity Monitoring Program', '2021-09-01', 'Active', 4),
+('Anti-Poaching Task Force', '2023-01-01', 'Active', 5);
+
+INSERT INTO Poaching_Incidents (date, description, sanctuary_id) VALUES
+('2024-01-12', 'Snare trap found during patrol', 1),
+('2024-02-05', 'Illegal hunting attempt prevented', 2),
+('2024-03-08', 'Suspicious movement detected in buffer zone', 3),
+('2024-03-18', 'Forest patrol seized illegal weapons', 4),
+('2024-04-02', 'Poachers apprehended by task force', 5);
+
+INSERT INTO Tourist_Permits (visitor_name, date, sanctuary_id) VALUES
+('Rahul Sharma', '2024-04-10', 1),
+('Sneha Reddy', '2024-04-11', 2),
+('Amit Verma', '2024-04-12', 3),
+('Priya Nair', '2024-04-13', 4),
+('Karan Mehta', '2024-04-14', 5);
+
+INSERT INTO Animals (name, species_id, sanctuary_id, age, gender, health_status) VALUES
+
+-- Bandipur (sanctuary_id = 1)
+('TGR-BND-001', 1, 1, 6, 'Male', 'Healthy'),
+('TGR-BND-002', 1, 1, 5, 'Female', 'Healthy'),
+('ELP-BND-001', 2, 1, 12, 'Female', 'Healthy'),
+('ELP-BND-002', 2, 1, 10, 'Male', 'Healthy'),
+('DER-BND-001', 5, 1, 4, 'Female', 'Healthy'),
+('BER-BND-001', 4, 1, 7, 'Male', 'Healthy'),
+
+-- Nagarhole (sanctuary_id = 2)
+('LEO-NAG-001', 3, 2, 5, 'Male', 'Injured'),
+('LEO-NAG-002', 3, 2, 6, 'Female', 'Healthy'),
+('ELP-NAG-001', 2, 2, 14, 'Male', 'Healthy'),
+('DER-NAG-001', 5, 2, 3, 'Female', 'Healthy'),
+('BOR-NAG-001', 10, 2, 5, 'Male', 'Healthy'),
+
+-- Bannerghatta (sanctuary_id = 3)
+('PEA-BAN-001', 6, 3, 3, 'Male', 'Healthy'),
+('LAN-BAN-001', 9, 3, 6, 'Female', 'Healthy'),
+('BOR-BAN-001', 10, 3, 4, 'Male', 'Healthy'),
+
+-- Kudremukh (sanctuary_id = 4)
+('PYT-KUD-001', 7, 4, 8, 'Female', 'Healthy'),
+('COB-KUD-001', 8, 4, 2, 'Male', 'Healthy'),
+('DER-KUD-001', 5, 4, 5, 'Female', 'Healthy'),
+
+-- Anshi (sanctuary_id = 5)
+('COB-ANS-001', 8, 5, 3, 'Male', 'Healthy'),
+('LAN-ANS-001', 9, 5, 7, 'Female', 'Healthy'),
+('BER-ANS-001', 4, 5, 6, 'Male', 'Healthy');
 
 
 CREATE TABLE users (
