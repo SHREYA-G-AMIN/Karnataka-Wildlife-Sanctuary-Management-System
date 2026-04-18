@@ -35,41 +35,41 @@ const ensureImageUrlColumn = () => {
 };
 
 const ensureHealthRecordsTable = () => {
-  db.query("SHOW TABLES LIKE 'Health_Records'", (err, rows) => {
+  db.query("SHOW TABLES LIKE 'health_records'", (err, rows) => {
     if (err) {
-      console.log("Health_Records schema check failed:", err);
+      console.log("health_records schema check failed:", err);
       return;
     }
 
     if (!Array.isArray(rows) || rows.length === 0) {
       const createSql = `
-        CREATE TABLE Health_Records (
+        CREATE TABLE health_records (
           id INT AUTO_INCREMENT PRIMARY KEY,
           animal_id INT NOT NULL,
           checkup_date DATE NOT NULL,
-          condition VARCHAR(120) NOT NULL,
+          \`condition\` VARCHAR(120) NOT NULL,
           treatment VARCHAR(255) NOT NULL,
           vet_name VARCHAR(120) NOT NULL,
-          FOREIGN KEY (animal_id) REFERENCES Animals(id)
+          FOREIGN KEY (animal_id) REFERENCES animals(id)
         )
       `;
       db.query(createSql, (createErr) => {
         if (createErr) {
-          console.log("Could not create Health_Records table:", createErr);
+          console.log("Could not create health_records table:", createErr);
         } else {
-          console.log("Created missing Health_Records table.");
+          console.log("Created missing health_records table.");
           
           const insertSql = `
-            INSERT INTO Health_Records (animal_id, checkup_date, condition, treatment, vet_name) VALUES
+            INSERT INTO health_records (animal_id, checkup_date, \`condition\`, treatment, vet_name) VALUES
             (1, '2024-03-05', 'Routine checkup', 'Vaccination and dietary supplement', 'Dr. Meera Rao'),
             (7, '2024-04-10', 'Minor injury', 'Wound cleaning and antibiotics', 'Dr. Arun Patel'),
             (12, '2024-04-14', 'Respiratory issues', 'Nebulizer therapy', 'Dr. Neha Singh')
           `;
           db.query(insertSql, (insertErr) => {
             if (insertErr) {
-              console.log("Could not seed Health_Records:", insertErr);
+              console.log("Could not seed health_records:", insertErr);
             } else {
-              console.log("Seeded Health_Records with initial data.");
+              console.log("Seeded health_records with initial data.");
             }
           });
         }

@@ -14,8 +14,8 @@ router.get("/health", (req, res) => {
       hr.\`condition\`,
       hr.treatment,
       hr.vet_name
-    FROM Health_Records hr
-    INNER JOIN Animals a ON hr.animal_id = a.id
+    FROM health_records hr
+    INNER JOIN animals a ON hr.animal_id = a.id
   `;
 
   const params = [];
