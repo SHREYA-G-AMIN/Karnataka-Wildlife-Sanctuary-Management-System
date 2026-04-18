@@ -41,10 +41,12 @@ const authRoutes = require("./routes/auth");
 const parksRoutes = require("./routes/parks");
 const animalsRoutes = require("./routes/animals");
 const speciesRoutes = require("./routes/species");
+const officersRoutes = require("./routes/officers");
 app.use("/", authRoutes);
 app.use("/", parksRoutes);
 app.use("/", animalsRoutes);
 app.use("/", speciesRoutes);
+app.use("/", officersRoutes);
 
 app.get("/health", (req, res) => {
   res.json({ success: true, message: "Wildlife API is running" });
@@ -63,5 +65,5 @@ const port = Number(process.env.PORT) || 5000;
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
-  console.log("Routes ready: POST /login, GET /parks, GET /animals, GET /species");
+  console.log("Routes ready: POST /login, GET /parks, GET /animals, GET /species, GET /officers");
 });

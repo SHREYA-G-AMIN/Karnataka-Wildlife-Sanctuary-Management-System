@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "../Dashboard.css";
 import { API_BASE_URL } from "../config";
 
-function Animals() {
+function Officers() {
   const navigate = useNavigate();
-  const [animals, setAnimals] = useState([]);
+  const [officers, setOfficers] = useState([]);
   const [parks, setParks] = useState([]);
   const [park, setPark] = useState("all");
   const [loading, setLoading] = useState(true);
@@ -20,7 +20,6 @@ function Animals() {
         const data = await res.json();
 
         if (!isMounted) return;
-
         if (res.ok && data?.success) {
           setParks(Array.isArray(data?.data) ? data.data : []);
         } else {
@@ -43,34 +42,33 @@ function Animals() {
   useEffect(() => {
     let isMounted = true;
 
-    const fetchAnimals = async () => {
+    const fetchOfficers = async () => {
       setLoading(true);
       setError("");
 
       try {
         const url =
           park === "all"
-            ? `${API_BASE_URL}/animals`
-            : `${API_BASE_URL}/animals?sanctuary_id=${park}`;
+            ? `${API_BASE_URL}/officers`
+            : `${API_BASE_URL}/officers?sanctuary_id=${park}`;
         const res = await fetch(url);
         const contentType = res.headers.get("content-type") || "";
         if (!contentType.includes("application/json")) {
-          throw new Error("Invalid animals response format");
+          throw new Error("Invalid officers response format");
         }
         const data = await res.json();
 
         if (!isMounted) return;
-
         if (res.ok && data?.success) {
-          setAnimals(Array.isArray(data?.data) ? data.data : []);
+          setOfficers(Array.isArray(data?.data) ? data.data : []);
         } else {
-          setAnimals([]);
-          setError(data?.message || "Failed to load animals");
+          setOfficers([]);
+          setError(data?.message || "Failed to load officers");
         }
       } catch (err) {
         if (!isMounted) return;
-        console.log("Animals request failed:", err);
-        setAnimals([]);
+        console.log("Officers request failed:", err);
+        setOfficers([]);
         setError(err?.message || "Unable to connect to the server");
       } finally {
         if (isMounted) {
@@ -79,7 +77,7 @@ function Animals() {
       }
     };
 
-    fetchAnimals();
+    fetchOfficers();
 
     return () => {
       isMounted = false;
@@ -88,15 +86,14 @@ function Animals() {
 
   return (
     <div className="dashboard-container">
-      {/* SIDEBAR */}
       <div className="sidebar">
         <h2 className="logo">Wildlife</h2>
 
         <ul>
           <li onClick={() => navigate("/dashboard")}>Dashboard</li>
           <li onClick={() => navigate("/species")}>Species</li>
-          <li className="active">Animals</li>
-          <li onClick={() => navigate("/officers")}>Officers</li>
+          <li onClick={() => navigate("/animals")}>Animals</li>
+          <li className="active">Officers</li>
           <li>Health</li>
           <li>Poaching</li>
           <li
@@ -112,10 +109,9 @@ function Animals() {
         </ul>
       </div>
 
-      {/* MAIN */}
       <div className="main">
         <div className="navbar">
-          <h2>Animals</h2>
+          <h2>Forest Officers</h2>
 
           <select
             value={park}
@@ -137,51 +133,45 @@ function Animals() {
         </div>
 
         <div className="activity">
-          <h2>Animals Table</h2>
+          <h2>Officer Directory</h2>
           <div className="table-wrap">
             <table className="animals-table">
               <thead>
                 <tr>
-                  <th>Animal</th>
-                  <th>Species</th>
-                  <th>Category</th>
+                  <th>Name</th>
+                  <th>Designation</th>
+                  <th>Experience</th>
                   <th>Sanctuary</th>
-                  <th>Age</th>
-                  <th>Gender</th>
-                  <th>Health Status</th>
                 </tr>
               </thead>
               <tbody>
                 {error ? (
                   <tr>
-                    <td colSpan="7" className="table-feedback error-message">
+                    <td colSpan="4" className="table-feedback error-message">
                       {error}
                     </td>
                   </tr>
                 ) : null}
                 {!error && loading ? (
                   <tr>
-                    <td colSpan="7" className="table-feedback">
-                      Loading animals...
+                    <td colSpan="4" className="table-feedback">
+                      Loading officers...
                     </td>
                   </tr>
                 ) : null}
-                {!error && !loading && animals.length === 0 ? (
+                {!error && !loading && officers.length === 0 ? (
                   <tr>
-                    <td colSpan="7" className="table-feedback">
-                      No animals found for the selected park.
+                    <td colSpan="4" className="table-feedback">
+                      No officers found for the selected sanctuary.
                     </td>
                   </tr>
                 ) : null}
-                {!error && !loading && animals.map((a) => (
-                  <tr key={a.animal_id}>
-                    <td>{a?.animal_name || "-"}</td>
-                    <td>{a?.species_name || "-"}</td>
-                    <td>{a?.species_category || "-"}</td>
-                    <td>{a?.sanctuary_name || "-"}</td>
-                    <td>{a?.age ?? "-"}</td>
-                    <td>{a?.gender || "-"}</td>
-                    <td>{a?.health_status || "-"}</td>
+                {!error && !loading && officers.map((officer) => (
+                  <tr key={officer?.officer_id}>
+                    <td>{officer?.name || "-"}</td>
+                    <td>{officer?.designation || "-"}</td>
+                    <td>{officer?.experience ?? 0} yrs</td>
+                    <td>{officer?.sanctuary_name || "-"}</td>
                   </tr>
                 ))}
               </tbody>
@@ -193,4 +183,4 @@ function Animals() {
   );
 }
 
-export default Animals;
+export default Officers;

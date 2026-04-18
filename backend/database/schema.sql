@@ -85,7 +85,7 @@ INSERT INTO Species (id, name, category, image_url) VALUES
 (5, 'Spotted Deer', 'Mammal', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80'),
 (6, 'Peacock', 'Bird', 'https://images.unsplash.com/photo-1516834474-48f35e58be8e?auto=format&fit=crop&w=900&q=80'),
 (7, 'Python', 'Reptile', 'https://images.unsplash.com/photo-1551974580-7f759bb7e3ef?auto=format&fit=crop&w=900&q=80'),
-(8, 'Cobra', 'Reptile', 'https://images.unsplash.com/photo-1501703979959-797917eb21c8?auto=format&fit=crop&w=900&q=80'),
+(8, 'Cobra', 'Reptile', 'https://tse4.mm.bing.net/th/id/OIP.QZYIPe4ETh_2JagSXbcwJgHaEK?rs=1&pid=ImgDetMain&o=7&rm=3'),
 (9, 'Langur', 'Mammal', 'https://images.unsplash.com/photo-1519222970733-f546218fa6d7?auto=format&fit=crop&w=900&q=80'),
 (10, 'Wild Boar', 'Mammal', 'https://images.unsplash.com/photo-1483721310020-03333e577078?auto=format&fit=crop&w=900&q=80');
 

@@ -140,7 +140,7 @@ function Species() {
           <li onClick={() => navigate("/dashboard")}>Dashboard</li>
           <li className="active">Species</li>
           <li onClick={() => navigate("/animals")}>Animals</li>
-          <li>Officers</li>
+          <li onClick={() => navigate("/officers")}>Officers</li>
           <li>Health</li>
           <li>Poaching</li>
           <li

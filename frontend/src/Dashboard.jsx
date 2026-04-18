@@ -70,7 +70,7 @@ function Dashboard() {
   <li className="active">Dashboard</li>
   <li onClick={() => navigate("/species")}>Species</li>
   <li onClick={() => navigate("/animals")}>Animals</li>
-  <li>Officers</li>
+  <li onClick={() => navigate("/officers")}>Officers</li>
   <li>Health</li>
   <li>Poaching</li>
   <li className="logout" onClick={() => { localStorage.removeItem("user"); localStorage.removeItem("role"); navigate("/login"); }}>Logout</li>
