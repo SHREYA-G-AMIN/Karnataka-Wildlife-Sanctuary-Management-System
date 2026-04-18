@@ -292,3 +292,38 @@ SELECT name, image_url FROM Species;
 UPDATE Species SET image_url = 'https://images.pexels.com/photos/2541239/pexels-photo-2541239.jpeg' WHERE name = 'Tiger';
 UPDATE Species SET image_url = 'https://wallpapers.com/images/hd/king-cobra-pictures-isety2azc1838os1.jpg' WHERE name = 'Cobra';
 select image_url from species where name = 'Tiger';
+
+UPDATE Species SET image_url = 'https://wallpapers.com/images/hd/elephant-hd-s4d6p1b39a94qwbm.jpg' WHERE name = 'Elephant';
+
+
+UPDATE Species SET image_url = 'https://tse4.mm.bing.net/th/id/OIP.PbRAf2Agi9wK83B6-IZGEwHaE8?rs=1&pid=ImgDetMain&o=7&rm=3' WHERE name = 'malabar hornbill';
+SELECT * FROM Species WHERE name = 'gaur';
+
+INSERT INTO Species (name, category, image_url)
+VALUES ('Gaur', 'Mammal', 'https://cdn1.byjus.com/wp-content/uploads/2021/02/Gaur_And_Calf_85173055.jpeg');
+
+INSERT INTO Species (name, category, image_url)
+VALUES (
+  'Sambar Deer',
+  'Mammal',
+  'https://good-nature-blog-uploads.s3.amazonaws.com/uploads/2022/06/Sambar-Deer-Borneo.jpg'
+);
+INSERT INTO Species (name, category, image_url)
+VALUES (
+  'King Cobra',
+  'Reptile',
+  'https://wallpapercave.com/wp/wp2710074.jpg'
+);
+INSERT INTO Species (name, category, image_url)
+VALUES (
+  'Malabar Hornbill',
+  'Bird',
+  'https://images.unsplash.com/photo-1591608513360-0f5f3a7e3b5c'
+);
+
+INSERT INTO Species (name, category, image_url)
+VALUES (
+  'Dhole',
+  'Mammal',
+  'https://th.bing.com/th/id/R.bf891ba66b523b3017e10f432d44802b?rik=97jp24bfGLVthQ&riu=http%3a%2f%2f2.bp.blogspot.com%2f-BCGcnUiJbl4%2fT7T0yygsg5I%2fAAAAAAAAF5k%2fuTII94_GjbI%2fs1600%2fdhole_800x533.jpg&ehk=DnuEOz2Ak%2fUNML%2fv1R8lC3lS4SPDsid%2fVNdTRJy%2b6jI%3d&risl=&pid=ImgRaw&r=0'
+);
