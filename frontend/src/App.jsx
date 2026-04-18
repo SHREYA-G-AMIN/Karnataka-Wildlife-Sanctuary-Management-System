@@ -3,7 +3,7 @@ import Login from "./pages/Login";
 import Welcome from "./pages/Welcome";
 import Animals from "./pages/Animals";
 import Dashboard from "./Dashboard";
-import Species from "./pages/Species";
+import Species from "./pages/Species.jsx";
 
 
 function App() {

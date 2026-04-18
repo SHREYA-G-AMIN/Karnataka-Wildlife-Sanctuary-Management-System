@@ -135,52 +135,43 @@ function Species() {
         </div>
 
         <div className="activity">
-          <h2>Species Table</h2>
-          <div className="table-wrap">
-            <table className="animals-table">
-              <thead>
-                <tr>
-                  <th>Species</th>
-                  <th>Category</th>
-                  <th>Sanctuary</th>
-                  <th>Animals Count</th>
-                  <th>Under Care</th>
-                </tr>
-              </thead>
-              <tbody>
-                {error ? (
-                  <tr>
-                    <td colSpan="5" className="table-feedback error-message">
-                      {error}
-                    </td>
-                  </tr>
-                ) : null}
-                {!error && loading ? (
-                  <tr>
-                    <td colSpan="5" className="table-feedback">
-                      Loading species...
-                    </td>
-                  </tr>
-                ) : null}
-                {!error && !loading && species.length === 0 ? (
-                  <tr>
-                    <td colSpan="5" className="table-feedback">
-                      No species found for the selected park.
-                    </td>
-                  </tr>
-                ) : null}
-                {!error && !loading && species.map((item) => (
-                  <tr key={`${item?.species_id}-${item?.sanctuary_id}`}>
-                    <td>{item?.species_name || "-"}</td>
-                    <td>{item?.category || "-"}</td>
-                    <td>{item?.sanctuary_name || "-"}</td>
-                    <td>{item?.animal_count ?? 0}</td>
-                    <td>{item?.under_care ?? 0}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <h2>Species Gallery</h2>
+
+          {error ? (
+            <div className="status-message error-message">{error}</div>
+          ) : null}
+
+          {!error && loading ? (
+            <div className="status-message">Loading species...</div>
+          ) : null}
+
+          {!error && !loading && species.length === 0 ? (
+            <div className="status-message">
+              No species found for the selected park.
+            </div>
+          ) : null}
+
+          {!error && !loading && species.length > 0 ? (
+            <div className="species-grid">
+              {species.map((item) => (
+                <div key={item?.species_id} className="species-card">
+                  <div className="species-image-wrapper">
+                    <img
+                      src={
+                        item?.image_url ||
+                        "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"
+                      }
+                      alt={item?.species_name || "Species"}
+                    />
+                  </div>
+                  <div className="species-content">
+                    <h3>{item?.species_name || "Unknown"}</h3>
+                    <p>{item?.category || "Unknown category"}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

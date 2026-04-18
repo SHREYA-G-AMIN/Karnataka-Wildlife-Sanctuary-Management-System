@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const db = require("./db");
 require("dotenv").config({ path: path.join(__dirname, ".env") });
 
 const app = express();
@@ -12,8 +13,28 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
 app.use(express.json());
+
+const ensureImageUrlColumn = () => {
+  db.query("SHOW COLUMNS FROM Species LIKE 'image_url'", (err, rows) => {
+    if (err) {
+      console.log("Species schema check failed:", err);
+      return;
+    }
+
+    if (!Array.isArray(rows) || rows.length === 0) {
+      db.query("ALTER TABLE Species ADD COLUMN image_url TEXT", (alterErr) => {
+        if (alterErr) {
+          console.log("Could not add Species.image_url column:", alterErr);
+        } else {
+          console.log("Added missing Species.image_url column.");
+        }
+      });
+    }
+  });
+};
+
+ensureImageUrlColumn();
 
 // routes
 const authRoutes = require("./routes/auth");

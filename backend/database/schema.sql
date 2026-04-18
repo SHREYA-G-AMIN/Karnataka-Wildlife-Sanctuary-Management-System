@@ -12,7 +12,8 @@ CREATE TABLE Sanctuary (
 CREATE TABLE Species (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(120) NOT NULL,
-  category VARCHAR(80) NOT NULL
+  category VARCHAR(80) NOT NULL,
+  image_url TEXT
 );
 
 CREATE TABLE Animals (
@@ -76,17 +77,17 @@ INSERT INTO Sanctuary (id, name, location, area) VALUES
 (4, 'Kudremukh National Park', 'Karnataka', '600 sq km'),
 (5, 'Kali (Anshi) National Park', 'Karnataka', '340 sq km');
 
-INSERT INTO Species (id, name, category) VALUES
-(1, 'Tiger', 'Mammal'),
-(2, 'Elephant', 'Mammal'),
-(3, 'Leopard', 'Mammal'),
-(4, 'Sloth Bear', 'Mammal'),
-(5, 'Spotted Deer', 'Mammal'),
-(6, 'Peacock', 'Bird'),
-(7, 'Python', 'Reptile'),
-(8, 'Cobra', 'Reptile'),
-(9, 'Langur', 'Mammal'),
-(10, 'Wild Boar', 'Mammal');
+INSERT INTO Species (id, name, category, image_url) VALUES
+(1, 'Tiger', 'Mammal', 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=900&q=80'),
+(2, 'Elephant', 'Mammal', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=900&q=80'),
+(3, 'Leopard', 'Mammal', 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=900&q=80'),
+(4, 'Sloth Bear', 'Mammal', 'https://images.unsplash.com/photo-1530268729830-8c7f90f3eedf?auto=format&fit=crop&w=900&q=80'),
+(5, 'Spotted Deer', 'Mammal', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80'),
+(6, 'Peacock', 'Bird', 'https://images.unsplash.com/photo-1516834474-48f35e58be8e?auto=format&fit=crop&w=900&q=80'),
+(7, 'Python', 'Reptile', 'https://images.unsplash.com/photo-1551974580-7f759bb7e3ef?auto=format&fit=crop&w=900&q=80'),
+(8, 'Cobra', 'Reptile', 'https://images.unsplash.com/photo-1501703979959-797917eb21c8?auto=format&fit=crop&w=900&q=80'),
+(9, 'Langur', 'Mammal', 'https://images.unsplash.com/photo-1519222970733-f546218fa6d7?auto=format&fit=crop&w=900&q=80'),
+(10, 'Wild Boar', 'Mammal', 'https://images.unsplash.com/photo-1483721310020-03333e577078?auto=format&fit=crop&w=900&q=80');
 
 INSERT INTO Plants (name, type, sanctuary_id) VALUES
 ('Teak', 'Tree', 1),

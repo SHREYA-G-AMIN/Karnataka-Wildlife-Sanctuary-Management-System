@@ -6,31 +6,25 @@ router.get("/species", (req, res) => {
   const { sanctuary_id } = req.query;
 
   let sql = `
-    SELECT
+    SELECT DISTINCT
       sp.id AS species_id,
       sp.name AS species_name,
       sp.category,
-      sa.id AS sanctuary_id,
-      sa.name AS sanctuary_name,
-      COUNT(a.id) AS animal_count,
-      SUM(CASE WHEN a.health_status <> 'Healthy' THEN 1 ELSE 0 END) AS under_care
+      sp.image_url
     FROM Species sp
-    LEFT JOIN Animals a
-      ON a.species_id = sp.id
-    LEFT JOIN Sanctuary sa
-      ON sa.id = a.sanctuary_id
   `;
   const params = [];
 
   if (sanctuary_id) {
-    sql += " WHERE sa.id = ?";
+    sql += `
+      INNER JOIN Animals a ON a.species_id = sp.id
+      WHERE a.sanctuary_id = ?
+    `;
     params.push(sanctuary_id);
   }
 
   sql += `
-    GROUP BY sp.id, sp.name, sp.category, sa.id, sa.name
-    HAVING COUNT(a.id) > 0
-    ORDER BY sa.id, sp.name
+    ORDER BY sp.name
   `;
 
   db.query(sql, params, (err, rows) => {
