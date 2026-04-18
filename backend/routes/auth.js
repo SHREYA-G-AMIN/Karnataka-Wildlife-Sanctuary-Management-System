@@ -16,12 +16,20 @@ const transporter = nodemailer.createTransport({
 
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
+  if (!email || !password) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Email and password are required" });
+  }
 
   db.query(
     "SELECT * FROM users WHERE email=? AND password=?",
     [email, password],
     async (err, result) => {
-      if (err) return res.status(500).json({ success: false, message: "DB error" });
+      if (err) {
+        console.log("Login failed:", err);
+        return res.status(500).json({ success: false, message: "Unable to process login" });
+      }
 
       if (result.length === 0) {
         return res.status(401).json({ success: false, message: "Invalid credentials" });

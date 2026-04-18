@@ -3,7 +3,7 @@ import Login from "./pages/Login";
 import Welcome from "./pages/Welcome";
 import Animals from "./pages/Animals";
 import Dashboard from "./Dashboard";
-
+import Species from "./pages/Species";
 
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/animals" element={<Animals />} />
+        <Route path="/species" element={<Species />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>

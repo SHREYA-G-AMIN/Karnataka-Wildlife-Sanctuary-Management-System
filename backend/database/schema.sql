@@ -171,6 +171,7 @@ INSERT INTO users (email, password) VALUES
 
 CREATE TABLE parks (
   id INT AUTO_INCREMENT PRIMARY KEY,
+  sanctuary_id INT NOT NULL UNIQUE,
   name VARCHAR(120) NOT NULL,
   location VARCHAR(100) NOT NULL,
   area VARCHAR(50) NOT NULL,
@@ -180,11 +181,13 @@ CREATE TABLE parks (
   species INT NOT NULL,
   endangered INT NOT NULL,
   poaching INT NOT NULL,
-  activity TEXT
+  activity TEXT,
+  FOREIGN KEY (sanctuary_id) REFERENCES Sanctuary(id)
 );
 
-INSERT INTO parks (name, location, area, famous, image, animals, species, endangered, poaching, activity) VALUES
+INSERT INTO parks (sanctuary_id, name, location, area, famous, image, animals, species, endangered, poaching, activity) VALUES
 (
+  1,
   'Bandipur National Park',
   'Karnataka',
   '874 sq km',
@@ -197,6 +200,7 @@ INSERT INTO parks (name, location, area, famous, image, animals, species, endang
   '[\"Poaching reported in Zone A\",\"Tiger treated for injury\",\"Elephant migration tracked\",\"New species recorded in Zone B\"]'
 ),
 (
+  2,
   'Nagarhole National Park',
   'Karnataka',
   '643 sq km',
@@ -209,6 +213,7 @@ INSERT INTO parks (name, location, area, famous, image, animals, species, endang
   '[\"Leopard spotted in Zone C\",\"Forest regeneration program started\",\"Illegal entry detected\"]'
 ),
 (
+  4,
   'Kudremukh National Park',
   'Karnataka',
   '600 sq km',
@@ -221,6 +226,7 @@ INSERT INTO parks (name, location, area, famous, image, animals, species, endang
   '[\"Plantation drive conducted\",\"Rare species sighted\"]'
 ),
 (
+  3,
   'Bannerghatta National Park',
   'Bangalore',
   '260 sq km',
@@ -233,6 +239,7 @@ INSERT INTO parks (name, location, area, famous, image, animals, species, endang
   '[\"Butterfly park maintenance\",\"Lion enclosure upgraded\"]'
 ),
 (
+  5,
   'Anshi National Park',
   'Karnataka',
   '340 sq km',
@@ -244,3 +251,23 @@ INSERT INTO parks (name, location, area, famous, image, animals, species, endang
   1,
   '[\"Tree census completed\",\"Animal tracking ongoing\"]'
 );
+
+UPDATE Conservation_Programs
+SET name = 'Project Tiger', start_date = '1973-04-01'
+WHERE id = 1;
+
+UPDATE Conservation_Programs
+SET name = 'Project Elephant', start_date = '1992-02-01'
+WHERE id = 2;
+
+UPDATE Conservation_Programs
+SET name = 'Habitat Restoration Program', start_date = '2021-06-01'
+WHERE id = 3;
+
+UPDATE Conservation_Programs
+SET name = 'Biodiversity Monitoring Initiative', start_date = '2020-01-01'
+WHERE id = 4;
+
+UPDATE Conservation_Programs
+SET name = 'Anti-Poaching Initiative', start_date = '2022-01-01'
+WHERE id = 5;

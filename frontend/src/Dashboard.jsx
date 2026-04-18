@@ -1,38 +1,52 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
+import { API_BASE_URL } from "./config";
 
 function Dashboard() {
   const navigate = useNavigate();
   const [parks, setParks] = useState([]);
   const [park, setPark] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     let isMounted = true;
 
     const fetchParks = async () => {
+      setLoading(true);
+      setError("");
+
       try {
-        const res = await fetch("http://localhost:5000/parks");
+        const res = await fetch(`${API_BASE_URL}/parks`);
         const contentType = res.headers.get("content-type") || "";
         if (!contentType.includes("application/json")) {
-          console.log("Parks response is not JSON");
-          return;
+          throw new Error("Invalid parks response format");
         }
         const data = await res.json();
 
         if (!isMounted) return;
 
         if (res.ok && data?.success) {
-          const list = Array.isArray(data.data) ? data.data : [];
+          const list = Array.isArray(data?.data) ? data.data : [];
           setParks(list);
           if (list.length > 0) {
-            setPark((prev) => prev || list[0].name);
+            setPark((prev) => prev || list[0]?.name || "");
           }
         } else {
-          console.log("Failed to load parks");
+          setParks([]);
+          setError(data?.message || "Failed to load parks");
         }
       } catch (err) {
+        if (!isMounted) return;
+
         console.log("Parks request failed:", err);
+        setParks([]);
+        setError(err?.message || "Unable to connect to the server");
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
@@ -43,7 +57,7 @@ function Dashboard() {
     };
   }, []);
 
-  const selectedPark = parks.find((p) => p.name === park);
+  const selectedPark = parks.find((p) => p?.name === park) || parks[0];
 
   return (
     <div className="dashboard-container">
@@ -54,7 +68,7 @@ function Dashboard() {
 
         <ul>
   <li className="active">Dashboard</li>
-  <li>Species</li>
+  <li onClick={() => navigate("/species")}>Species</li>
   <li onClick={() => navigate("/animals")}>Animals</li>
   <li>Officers</li>
   <li>Health</li>
@@ -74,9 +88,12 @@ function Dashboard() {
             value={park}
             onChange={(e) => setPark(e.target.value)}
             className="park-select"
+            disabled={loading || parks.length === 0}
           >
             {parks.map((p) => (
-              <option key={p.id || p.name}>{p.name}</option>
+              <option key={p?.id || p?.name} value={p?.name}>
+                {p?.name}
+              </option>
             ))}
           </select>
 
@@ -93,7 +110,7 @@ function Dashboard() {
             background: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${selectedPark?.image || ""}) center/cover`,
           }}
         >
-          <h1>{park || "Wildlife Park"}</h1>
+          <h1>{selectedPark?.name || "Wildlife Park"}</h1>
           <p>
             Famous for {selectedPark?.famous || "wildlife"} and rich biodiversity.
           </p>
@@ -109,22 +126,22 @@ function Dashboard() {
         <div className="stats">
           <div className="card">
             <h3>Total Animals</h3>
-            <p>{selectedPark?.animals ?? "-"}</p>
+            <p>{loading ? "..." : selectedPark?.animals ?? "-"}</p>
           </div>
 
           <div className="card">
             <h3>Total Species</h3>
-            <p>{selectedPark?.species ?? "-"}</p>
+            <p>{loading ? "..." : selectedPark?.species ?? "-"}</p>
           </div>
 
           <div className="card">
             <h3>Endangered</h3>
-            <p>{selectedPark?.endangered ?? "-"}</p>
+            <p>{loading ? "..." : selectedPark?.endangered ?? "-"}</p>
           </div>
 
           <div className="card">
             <h3>Poaching Cases</h3>
-            <p>{selectedPark?.poaching ?? "-"}</p>
+            <p>{loading ? "..." : selectedPark?.poaching ?? "-"}</p>
           </div>
         </div>
 
@@ -132,11 +149,19 @@ function Dashboard() {
         <div className="activity">
           <h2>Recent Activity</h2>
 
-          {(selectedPark?.activity || []).map((item, index) => (
-            <div key={index} className="activity-item">
-              {item}
-            </div>
-          ))}
+          {error ? <div className="status-message error-message">{error}</div> : null}
+          {!error && loading ? <div className="status-message">Loading park data...</div> : null}
+          {!error && !loading && (selectedPark?.activity || []).length === 0 ? (
+            <div className="status-message">No recent activity available.</div>
+          ) : null}
+
+          {!error &&
+            !loading &&
+            (selectedPark?.activity || []).map((item, index) => (
+              <div key={index} className="activity-item">
+                {item}
+              </div>
+            ))}
         </div>
         
 

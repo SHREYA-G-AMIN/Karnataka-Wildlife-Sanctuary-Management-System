@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUserAlt, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import "../index.css";
+import { API_BASE_URL } from "../config";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -25,7 +26,7 @@ function Login() {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/login", {
+      const res = await fetch(`${API_BASE_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,7 +41,7 @@ function Login() {
       let data = null;
       try {
         data = raw ? JSON.parse(raw) : null;
-      } catch (parseErr) {
+      } catch {
         data = null;
       }
       console.log("Login response:", res.status, data ?? raw);

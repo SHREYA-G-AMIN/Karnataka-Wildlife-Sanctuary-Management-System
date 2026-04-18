@@ -180,6 +180,18 @@
   cursor: pointer;
 }
 
+.dashboard-container .status-message {
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.04);
+  color: #0f172a;
+}
+
+.dashboard-container .error-message {
+  background: rgba(220, 38, 38, 0.1);
+  color: #991b1b;
+}
+
 /* ===== TABLE (ANIMALS) ===== */
 .dashboard-container .table-wrap {
   width: 100%;
@@ -219,6 +231,12 @@
 
 .dashboard-container .animals-table tbody tr:hover {
   background: rgba(76, 175, 80, 0.08);
+}
+
+.dashboard-container .table-feedback {
+  text-align: center;
+  padding: 18px 14px;
+  font-weight: 500;
 }
 
 /* ===== ANIMATIONS ===== */

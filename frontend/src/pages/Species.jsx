@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "../Dashboard.css";
 import { API_BASE_URL } from "../config";
 
-function Animals() {
+function Species() {
   const navigate = useNavigate();
-  const [animals, setAnimals] = useState([]);
+  const [species, setSpecies] = useState([]);
   const [parks, setParks] = useState([]);
   const [park, setPark] = useState("all");
   const [loading, setLoading] = useState(true);
@@ -43,34 +43,34 @@ function Animals() {
   useEffect(() => {
     let isMounted = true;
 
-    const fetchAnimals = async () => {
+    const fetchSpecies = async () => {
       setLoading(true);
       setError("");
 
       try {
         const url =
           park === "all"
-            ? `${API_BASE_URL}/animals`
-            : `${API_BASE_URL}/animals?sanctuary_id=${park}`;
+            ? `${API_BASE_URL}/species`
+            : `${API_BASE_URL}/species?sanctuary_id=${park}`;
         const res = await fetch(url);
         const contentType = res.headers.get("content-type") || "";
         if (!contentType.includes("application/json")) {
-          throw new Error("Invalid animals response format");
+          throw new Error("Invalid species response format");
         }
-        const data = await res.json();
 
+        const data = await res.json();
         if (!isMounted) return;
 
         if (res.ok && data?.success) {
-          setAnimals(Array.isArray(data?.data) ? data.data : []);
+          setSpecies(Array.isArray(data?.data) ? data.data : []);
         } else {
-          setAnimals([]);
-          setError(data?.message || "Failed to load animals");
+          setSpecies([]);
+          setError(data?.message || "Failed to load species");
         }
       } catch (err) {
         if (!isMounted) return;
-        console.log("Animals request failed:", err);
-        setAnimals([]);
+        console.log("Species request failed:", err);
+        setSpecies([]);
         setError(err?.message || "Unable to connect to the server");
       } finally {
         if (isMounted) {
@@ -79,7 +79,7 @@ function Animals() {
       }
     };
 
-    fetchAnimals();
+    fetchSpecies();
 
     return () => {
       isMounted = false;
@@ -88,14 +88,13 @@ function Animals() {
 
   return (
     <div className="dashboard-container">
-      {/* SIDEBAR */}
       <div className="sidebar">
         <h2 className="logo">Wildlife</h2>
 
         <ul>
           <li onClick={() => navigate("/dashboard")}>Dashboard</li>
-          <li onClick={() => navigate("/species")}>Species</li>
-          <li className="active">Animals</li>
+          <li className="active">Species</li>
+          <li onClick={() => navigate("/animals")}>Animals</li>
           <li>Officers</li>
           <li>Health</li>
           <li>Poaching</li>
@@ -112,10 +111,9 @@ function Animals() {
         </ul>
       </div>
 
-      {/* MAIN */}
       <div className="main">
         <div className="navbar">
-          <h2>Animals</h2>
+          <h2>Species</h2>
 
           <select
             value={park}
@@ -137,51 +135,47 @@ function Animals() {
         </div>
 
         <div className="activity">
-          <h2>Animals Table</h2>
+          <h2>Species Table</h2>
           <div className="table-wrap">
             <table className="animals-table">
               <thead>
                 <tr>
-                  <th>Animal</th>
                   <th>Species</th>
                   <th>Category</th>
                   <th>Sanctuary</th>
-                  <th>Age</th>
-                  <th>Gender</th>
-                  <th>Health Status</th>
+                  <th>Animals Count</th>
+                  <th>Under Care</th>
                 </tr>
               </thead>
               <tbody>
                 {error ? (
                   <tr>
-                    <td colSpan="7" className="table-feedback error-message">
+                    <td colSpan="5" className="table-feedback error-message">
                       {error}
                     </td>
                   </tr>
                 ) : null}
                 {!error && loading ? (
                   <tr>
-                    <td colSpan="7" className="table-feedback">
-                      Loading animals...
+                    <td colSpan="5" className="table-feedback">
+                      Loading species...
                     </td>
                   </tr>
                 ) : null}
-                {!error && !loading && animals.length === 0 ? (
+                {!error && !loading && species.length === 0 ? (
                   <tr>
-                    <td colSpan="7" className="table-feedback">
-                      No animals found for the selected park.
+                    <td colSpan="5" className="table-feedback">
+                      No species found for the selected park.
                     </td>
                   </tr>
                 ) : null}
-                {!error && !loading && animals.map((a) => (
-                  <tr key={a.animal_id}>
-                    <td>{a?.animal_name || "-"}</td>
-                    <td>{a?.species_name || "-"}</td>
-                    <td>{a?.species_category || "-"}</td>
-                    <td>{a?.sanctuary_name || "-"}</td>
-                    <td>{a?.age ?? "-"}</td>
-                    <td>{a?.gender || "-"}</td>
-                    <td>{a?.health_status || "-"}</td>
+                {!error && !loading && species.map((item) => (
+                  <tr key={`${item?.species_id}-${item?.sanctuary_id}`}>
+                    <td>{item?.species_name || "-"}</td>
+                    <td>{item?.category || "-"}</td>
+                    <td>{item?.sanctuary_name || "-"}</td>
+                    <td>{item?.animal_count ?? 0}</td>
+                    <td>{item?.under_care ?? 0}</td>
                   </tr>
                 ))}
               </tbody>
@@ -193,4 +187,4 @@ function Animals() {
   );
 }
 
-export default Animals;
+export default Species;
