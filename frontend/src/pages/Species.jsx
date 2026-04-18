@@ -11,6 +11,51 @@ function Species() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const extraSpecies = [
+    {
+      species_id: "extra-1",
+      species_name: "Gaur",
+      category: "Mammal",
+      image_url:
+        "https://images.unsplash.com/photo-1607649266416-a77a215d23c8?auto=format&fit=crop&w=900&q=80",
+    },
+    {
+      species_id: "extra-2",
+      species_name: "Sambar Deer",
+      category: "Mammal",
+      image_url:
+        "https://images.unsplash.com/photo-1522441815190-34a3d3ddbb84?auto=format&fit=crop&w=900&q=80",
+    },
+    {
+      species_id: "extra-3",
+      species_name: "King Cobra",
+      category: "Reptile",
+      image_url:
+        "https://images.unsplash.com/photo-1586287011602-530d223fa0b5?auto=format&fit=crop&w=900&q=80",
+    },
+    {
+      species_id: "extra-4",
+      species_name: "Hornbill",
+      category: "Bird",
+      image_url:
+        "https://images.unsplash.com/photo-1496345961004-90fa4ecbd7a9?auto=format&fit=crop&w=900&q=80",
+    },
+    {
+      species_id: "extra-5",
+      species_name: "Cheetah",
+      category: "Mammal",
+      image_url:
+        "https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?auto=format&fit=crop&w=900&q=80",
+    },
+  ];
+
+  const displayedSpecies = [
+    ...species,
+    ...extraSpecies.filter(
+      (item) => !species.some((existing) => existing.species_name === item.species_name)
+    ),
+  ];
+
   useEffect(() => {
     let isMounted = true;
 
@@ -151,9 +196,9 @@ function Species() {
             </div>
           ) : null}
 
-          {!error && !loading && species.length > 0 ? (
+          {!error && !loading && displayedSpecies.length > 0 ? (
             <div className="species-grid">
-              {species.map((item) => (
+              {displayedSpecies.map((item) => (
                 <div key={item?.species_id} className="species-card">
                   <div className="species-image-wrapper">
                     <img
