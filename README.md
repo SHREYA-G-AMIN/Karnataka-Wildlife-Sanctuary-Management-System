@@ -1,2 +1,90 @@
-# Karnataka-Wildlife-Sanctuary-Management-System
-🌿 Karnataka Wildlife Sanctuary Management System  A full-stack web application to manage wildlife data across multiple sanctuaries in Karnataka. It includes animals, plant species, conservation programs, forest officers, poaching incidents, and tourist permits using React, Node.js, and MySQL.
+# 🌿 Karnataka Wildlife Sanctuary Management System
+
+## Description
+A full-stack web application to manage and monitor wildlife data across Karnataka national parks. It includes animals, species, health records, forest officers, and poaching activities. The project focuses on real-world database design, API integration, and dynamic frontend rendering.
+
+## Features
+- Authentication with email notification on login
+- Dashboard with dynamic park data (animals, species, endangered, poaching)
+- Animals page with filtering
+- Species gallery with images (DB-driven, no dummy data)
+- Officers management
+- Health records tracking
+- Poaching incidents tracking
+
+## Tech Stack
+### Frontend
+- React (Vite)
+- CSS
+- React Router
+
+### Backend
+- Node.js
+- Express.js
+
+### Database
+- MySQL
+
+### Other
+- Nodemailer
+- dotenv
+
+## Database Tables
+- `Sanctuary`
+- `Species`
+- `Animals`
+- `Health_Records`
+- `Forest_Officers`
+- `Poaching_Incidents`
+- `Conservation_Programs`
+- `Parks`
+
+## API Endpoints
+- `POST /login`
+- `GET /parks`
+- `GET /animals`
+- `GET /species`
+- `GET /officers`
+- `GET /health`
+- `GET /poaching`
+
+## Setup Instructions
+### Backend
+```bash
+cd backend
+npm install
+node server.js
+```
+
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## Environment Variables
+```bash
+PORT=5000
+EMAIL_USER=[your_email@gmail.com](mailto:your_email@gmail.com)
+EMAIL_PASS=your_app_password
+CLIENT_URL=http://localhost:5173
+```
+
+## Highlights
+- Full-stack implementation
+- Real-world structured data
+- Proper relational database design
+- Clean UI
+
+## Learning Outcomes
+- Full-stack development
+- API integration
+- Database design
+- Debugging
+
+## Author
+Shreya G Amin
+
+## License
+For academic use
