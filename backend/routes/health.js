@@ -10,12 +10,14 @@ router.get("/health", (req, res) => {
       hr.id AS health_id,
       hr.animal_id,
       a.name AS animal_name,
+      s.name AS sanctuary_name,
       hr.checkup_date,
       hr.\`condition\`,
       hr.treatment,
       hr.vet_name
     FROM health_records hr
     INNER JOIN animals a ON hr.animal_id = a.id
+    INNER JOIN Sanctuary s ON a.sanctuary_id = s.id
   `;
 
   const params = [];
