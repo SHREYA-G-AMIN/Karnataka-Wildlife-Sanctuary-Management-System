@@ -162,7 +162,7 @@ function Health() {
           <li onClick={() => navigate("/animals")}>Animals</li>
           <li onClick={() => navigate("/officers")}>Officers</li>
           <li className="active">Health</li>
-          <li>Poaching</li>
+          <li onClick={() => navigate("/poaching")}>Poaching</li>
           <li
             className="logout"
             onClick={() => {

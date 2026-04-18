@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Dashboard.css";
 import { API_BASE_URL } from "./config";
 
@@ -73,7 +73,7 @@ function Dashboard() {
   <li onClick={() => navigate("/officers")}>Officers</li>
   <li onClick={() => navigate("/health")}>Health</li>
   <li onClick={() => navigate("/poaching")}>Poaching</li>
-  <li className="logout" onClick={() => { localStorage.removeItem("user"); localStorage.removeItem("role"); navigate("/login"); }}>Logout</li>
+  <li className="logout" onClick={(e) => { e.preventDefault(); localStorage.removeItem("user"); localStorage.removeItem("role"); navigate("/login"); }}>Logout</li>
 </ul>
       </div>
 

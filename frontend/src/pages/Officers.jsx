@@ -95,7 +95,7 @@ function Officers() {
           <li onClick={() => navigate("/animals")}>Animals</li>
           <li className="active">Officers</li>
           <li onClick={() => navigate("/health")}>Health</li>
-          <li>Poaching</li>
+          <li onClick={() => navigate("/poaching")}>Poaching</li>
           <li
             className="logout"
             onClick={() => {

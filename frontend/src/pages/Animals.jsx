@@ -98,7 +98,7 @@ function Animals() {
           <li className="active">Animals</li>
           <li onClick={() => navigate("/officers")}>Officers</li>
           <li onClick={() => navigate("/health")}>Health</li>
-          <li>Poaching</li>
+          <li onClick={() => navigate("/poaching")}>Poaching</li>
           <li
             className="logout"
             onClick={() => {
