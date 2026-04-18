@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "../Dashboard.css";
 import { API_BASE_URL } from "../config";
 
-function Animals() {
+function Health() {
   const navigate = useNavigate();
-  const [animals, setAnimals] = useState([]);
+  const [records, setRecords] = useState([]);
   const [parks, setParks] = useState([]);
   const [park, setPark] = useState("all");
   const [loading, setLoading] = useState(true);
@@ -20,7 +20,6 @@ function Animals() {
         const data = await res.json();
 
         if (!isMounted) return;
-
         if (res.ok && data?.success) {
           setParks(Array.isArray(data?.data) ? data.data : []);
         } else {
@@ -43,34 +42,33 @@ function Animals() {
   useEffect(() => {
     let isMounted = true;
 
-    const fetchAnimals = async () => {
+    const fetchHealth = async () => {
       setLoading(true);
       setError("");
 
       try {
         const url =
           park === "all"
-            ? `${API_BASE_URL}/animals`
-            : `${API_BASE_URL}/animals?sanctuary_id=${park}`;
+            ? `${API_BASE_URL}/health`
+            : `${API_BASE_URL}/health?sanctuary_id=${park}`;
         const res = await fetch(url);
         const contentType = res.headers.get("content-type") || "";
         if (!contentType.includes("application/json")) {
-          throw new Error("Invalid animals response format");
+          throw new Error("Invalid health response format");
         }
         const data = await res.json();
 
         if (!isMounted) return;
-
         if (res.ok && data?.success) {
-          setAnimals(Array.isArray(data?.data) ? data.data : []);
+          setRecords(Array.isArray(data?.data) ? data.data : []);
         } else {
-          setAnimals([]);
-          setError(data?.message || "Failed to load animals");
+          setRecords([]);
+          setError(data?.message || "Failed to load health records");
         }
       } catch (err) {
         if (!isMounted) return;
-        console.log("Animals request failed:", err);
-        setAnimals([]);
+        console.log("Health request failed:", err);
+        setRecords([]);
         setError(err?.message || "Unable to connect to the server");
       } finally {
         if (isMounted) {
@@ -79,7 +77,7 @@ function Animals() {
       }
     };
 
-    fetchAnimals();
+    fetchHealth();
 
     return () => {
       isMounted = false;
@@ -88,16 +86,15 @@ function Animals() {
 
   return (
     <div className="dashboard-container">
-      {/* SIDEBAR */}
       <div className="sidebar">
         <h2 className="logo">Wildlife</h2>
 
         <ul>
           <li onClick={() => navigate("/dashboard")}>Dashboard</li>
           <li onClick={() => navigate("/species")}>Species</li>
-          <li className="active">Animals</li>
+          <li onClick={() => navigate("/animals")}>Animals</li>
           <li onClick={() => navigate("/officers")}>Officers</li>
-          <li onClick={() => navigate("/health")}>Health</li>
+          <li className="active">Health</li>
           <li>Poaching</li>
           <li
             className="logout"
@@ -112,10 +109,9 @@ function Animals() {
         </ul>
       </div>
 
-      {/* MAIN */}
       <div className="main">
         <div className="navbar">
-          <h2>Animals</h2>
+          <h2>Health Records</h2>
 
           <select
             value={park}
@@ -137,51 +133,49 @@ function Animals() {
         </div>
 
         <div className="activity">
-          <h2>Animals Table</h2>
+          <h2>Health Records</h2>
           <div className="table-wrap">
             <table className="animals-table">
               <thead>
                 <tr>
-                  <th>Animal</th>
-                  <th>Species</th>
-                  <th>Category</th>
-                  <th>Sanctuary</th>
-                  <th>Age</th>
-                  <th>Gender</th>
-                  <th>Health Status</th>
+                  <th>Animal ID / Name</th>
+                  <th>Checkup Date</th>
+                  <th>Condition</th>
+                  <th>Treatment</th>
+                  <th>Vet Name</th>
                 </tr>
               </thead>
               <tbody>
                 {error ? (
                   <tr>
-                    <td colSpan="7" className="table-feedback error-message">
+                    <td colSpan="5" className="table-feedback error-message">
                       {error}
                     </td>
                   </tr>
                 ) : null}
                 {!error && loading ? (
                   <tr>
-                    <td colSpan="7" className="table-feedback">
-                      Loading animals...
+                    <td colSpan="5" className="table-feedback">
+                      Loading health records...
                     </td>
                   </tr>
                 ) : null}
-                {!error && !loading && animals.length === 0 ? (
+                {!error && !loading && records.length === 0 ? (
                   <tr>
-                    <td colSpan="7" className="table-feedback">
-                      No animals found for the selected park.
+                    <td colSpan="5" className="table-feedback">
+                      No health records found.
                     </td>
                   </tr>
                 ) : null}
-                {!error && !loading && animals.map((a) => (
-                  <tr key={a.animal_id}>
-                    <td>{a?.animal_name || "-"}</td>
-                    <td>{a?.species_name || "-"}</td>
-                    <td>{a?.species_category || "-"}</td>
-                    <td>{a?.sanctuary_name || "-"}</td>
-                    <td>{a?.age ?? "-"}</td>
-                    <td>{a?.gender || "-"}</td>
-                    <td>{a?.health_status || "-"}</td>
+                {!error && !loading && records.map((record) => (
+                  <tr key={record?.health_id}>
+                    <td>
+                      {record?.animal_id || "-"} / {record?.animal_name || "-"}
+                    </td>
+                    <td>{record?.checkup_date || "-"}</td>
+                    <td>{record?.condition || "-"}</td>
+                    <td>{record?.treatment || "-"}</td>
+                    <td>{record?.vet_name || "-"}</td>
                   </tr>
                 ))}
               </tbody>
@@ -193,4 +187,4 @@ function Animals() {
   );
 }
 
-export default Animals;
+export default Health;

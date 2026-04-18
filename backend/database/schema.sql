@@ -28,6 +28,16 @@ CREATE TABLE Animals (
   FOREIGN KEY (sanctuary_id) REFERENCES Sanctuary(id)
 );
 
+CREATE TABLE Health_Records (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  animal_id INT NOT NULL,
+  checkup_date DATE NOT NULL,
+  condition VARCHAR(120) NOT NULL,
+  treatment VARCHAR(255) NOT NULL,
+  vet_name VARCHAR(120) NOT NULL,
+  FOREIGN KEY (animal_id) REFERENCES Animals(id)
+);
+
 CREATE TABLE Plants (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(120) NOT NULL,
@@ -78,7 +88,7 @@ INSERT INTO Sanctuary (id, name, location, area) VALUES
 (5, 'Kali (Anshi) National Park', 'Karnataka', '340 sq km');
 
 INSERT INTO Species (id, name, category, image_url) VALUES
-(1, 'Tiger', 'Mammal', 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=900&q=80'),
+(1, 'Tiger', 'Mammal', 'https://images.pexels.com/photos/2541239/pexels-photo-2541239.jpeg?cs=srgb&dl=pexels-wb2008-2541239.jpg&fm=jpg'),
 (2, 'Elephant', 'Mammal', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=900&q=80'),
 (3, 'Leopard', 'Mammal', 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=900&q=80'),
 (4, 'Sloth Bear', 'Mammal', 'https://images.unsplash.com/photo-1530268729830-8c7f90f3eedf?auto=format&fit=crop&w=900&q=80'),
@@ -160,6 +170,10 @@ INSERT INTO Animals (name, species_id, sanctuary_id, age, gender, health_status)
 ('LAN-ANS-001', 9, 5, 7, 'Female', 'Healthy'),
 ('BER-ANS-001', 4, 5, 6, 'Male', 'Healthy');
 
+INSERT INTO Health_Records (animal_id, checkup_date, condition, treatment, vet_name) VALUES
+(1, '2024-03-05', 'Routine checkup', 'Vaccination and dietary supplement', 'Dr. Meera Rao'),
+(7, '2024-04-10', 'Minor injury', 'Wound cleaning and antibiotics', 'Dr. Arun Patel'),
+(12, '2024-04-14', 'Respiratory issues', 'Nebulizer therapy', 'Dr. Neha Singh');
 
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
