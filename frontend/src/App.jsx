@@ -6,6 +6,7 @@ import Dashboard from "./Dashboard";
 import Species from "./pages/Species.jsx";
 import Officers from "./pages/Officers.jsx";
 import Health from "./pages/Health.jsx";
+import Poaching from "./pages/Poaching.jsx";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/species" element={<Species />} />
         <Route path="/officers" element={<Officers />} />
         <Route path="/health" element={<Health />} />
+        <Route path="/poaching" element={<Poaching />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>

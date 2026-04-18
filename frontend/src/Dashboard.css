@@ -354,6 +354,110 @@
   text-align: center;
 }
 
+/* ===== POACHING CARDS ===== */
+.dashboard-container .poaching-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.dashboard-container .poaching-card {
+  background: rgba(255,255,255,0.9);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  border: 1px solid rgba(46, 125, 50, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-container .poaching-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+}
+
+.dashboard-container .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(46, 125, 50, 0.1);
+}
+
+.dashboard-container .card-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.dashboard-container .status-badge {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dashboard-container .card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dashboard-container .animal-target,
+.dashboard-container .location,
+.dashboard-container .date {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dashboard-container .label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dashboard-container .value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.dashboard-container .description {
+  margin-top: 8px;
+}
+
+.dashboard-container .description-text {
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0;
+  padding: 8px 0;
+  background: rgba(15, 23, 42, 0.03);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.dashboard-container .error-card,
+.dashboard-container .loading-card,
+.dashboard-container .empty-card {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.dashboard-container .error-card p {
+  color: #e74c3c;
+  font-weight: 500;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   .dashboard-container .stats {
