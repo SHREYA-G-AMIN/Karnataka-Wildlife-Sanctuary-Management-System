@@ -29,6 +29,27 @@ A full-stack web application to manage and monitor wildlife data across Karnatak
 - Nodemailer
 - dotenv
 
+## Covered National Parks
+This system includes data for the following national parks:
+
+- Bandipur National Park
+- Nagarhole National Park
+- Bannerghatta National Park
+- Kudremukh National Park
+- Kali (Anshi) National Park
+
+These parks were selected to represent diverse ecosystems across Karnataka, including forests, grasslands, and biodiversity hotspots.
+
+## Project Structure
+```
+wildlife-project/
+│
+├── frontend/        # React (Vite)
+├── backend/         # Node + Express
+├── database/        # SQL schema and data
+└── README.md
+```
+
 ## Database Tables
 - `Sanctuary`
 - `Species`
@@ -87,4 +108,4 @@ CLIENT_URL=http://localhost:5173
 Shreya G Amin
 
 ## License
-For academic use
+This project is developed as part of a DBMS (Database Management Systems) academic project and demonstrates full-stack application development with a focus on database design and integration.
