@@ -236,7 +236,7 @@ function Health() {
                 ) : null}
                 {!error && !loading && records.map((record) => {
                   const conditionBadge = getConditionBadge(record?.condition);
-                  const animalDisplay = record?.animal_name ? record.animal_name : "Unknown Animal";
+                  const animalDisplay = record?.animal_name || record?.animal_code || "Unknown Animal";
                   const sanctuaryDisplay = record?.sanctuary_name || "Unknown Sanctuary";
                   
                   return (

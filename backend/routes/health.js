@@ -9,7 +9,8 @@ router.get("/health", (req, res) => {
     SELECT
       hr.id AS health_id,
       hr.animal_id,
-      a.name AS animal_name,
+      a.name AS animal_code,
+      sp.name AS animal_name,
       s.name AS sanctuary_name,
       hr.checkup_date,
       hr.\`condition\`,
@@ -17,6 +18,7 @@ router.get("/health", (req, res) => {
       hr.vet_name
     FROM health_records hr
     INNER JOIN animals a ON hr.animal_id = a.id
+    INNER JOIN Species sp ON a.species_id = sp.id
     INNER JOIN Sanctuary s ON a.sanctuary_id = s.id
   `;
 
@@ -26,7 +28,7 @@ router.get("/health", (req, res) => {
     params.push(sanctuary_id);
   }
 
-  sql += " ORDER BY hr.checkup_date DESC, a.name";
+  sql += " ORDER BY hr.checkup_date DESC, sp.name";
 
   db.query(sql, params, (err, rows) => {
     if (err) {
