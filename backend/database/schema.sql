@@ -286,3 +286,9 @@ WHERE id = 4;
 UPDATE Conservation_Programs
 SET name = 'Anti-Poaching Initiative', start_date = '2022-01-01'
 WHERE id = 5;
+
+SELECT name, image_url FROM Species;
+
+UPDATE Species SET image_url = 'https://images.pexels.com/photos/2541239/pexels-photo-2541239.jpeg' WHERE name = 'Tiger';
+UPDATE Species SET image_url = 'https://wallpapers.com/images/hd/king-cobra-pictures-isety2azc1838os1.jpg' WHERE name = 'Cobra';
+select image_url from species where name = 'Tiger';

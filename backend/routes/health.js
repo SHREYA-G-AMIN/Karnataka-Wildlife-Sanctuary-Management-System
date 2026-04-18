@@ -11,7 +11,7 @@ router.get("/health", (req, res) => {
       hr.animal_id,
       a.name AS animal_name,
       hr.checkup_date,
-      hr.condition,
+      hr.\`condition\`,
       hr.treatment,
       hr.vet_name
     FROM Health_Records hr
@@ -28,11 +28,12 @@ router.get("/health", (req, res) => {
 
   db.query(sql, params, (err, rows) => {
     if (err) {
-      console.log("Health records fetch failed:", err);
+      console.log("Health records fetch failed:", err.message || err);
+      console.log("SQL:", sql);
       return res.status(500).json({ success: false, message: "Unable to load health records" });
     }
 
-    return res.json({ success: true, data: rows });
+    return res.json({ success: true, data: rows || [] });
   });
 });
 
