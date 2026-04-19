@@ -61,6 +61,16 @@ function Dashboard() {
 
   const selectedPark = parks.find((p) => p?.name === park) || parks[0];
 
+  // Get hero background with fallback
+  const getHeroBackground = () => {
+    const imageUrl = selectedPark?.image;
+    if (imageUrl && imageUrl.trim() !== "") {
+      return `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${imageUrl}) center/cover`;
+    }
+    // Fallback to a nature-themed gradient
+    return `linear-gradient(135deg, rgba(46, 125, 50, 0.8), rgba(76, 175, 80, 0.8)), linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3))`;
+  };
+
   // Fetch Conservation Programs when park changes
   useEffect(() => {
     let isMounted = true;
@@ -156,7 +166,7 @@ function Dashboard() {
         <div
           className="hero"
           style={{
-            background: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${selectedPark?.image || ""}) center/cover`,
+            background: getHeroBackground(),
           }}
         >
           <h1>{selectedPark?.name || "Wildlife Park"}</h1>
