@@ -105,6 +105,7 @@ const speciesRoutes = require("./routes/species");
 const officersRoutes = require("./routes/officers");
 const healthRoutes = require("./routes/health");
 const poachingRoutes = require("./routes/poaching");
+const programsRoutes = require("./routes/programs");
 app.use("/", authRoutes);
 app.use("/", parksRoutes);
 app.use("/", animalsRoutes);
@@ -112,6 +113,7 @@ app.use("/", speciesRoutes);
 app.use("/", officersRoutes);
 app.use("/", healthRoutes);
 app.use("/", poachingRoutes);
+app.use("/", programsRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Route not found" });
@@ -126,5 +128,5 @@ const port = Number(process.env.PORT) || 5000;
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
-  console.log("Routes ready: POST /login, GET /parks, GET /animals, GET /species, GET /officers, GET /health, GET /poaching");
+  console.log("Routes ready: POST /login, GET /parks, GET /animals, GET /species, GET /officers, GET /health, GET /poaching, GET /programs");
 });

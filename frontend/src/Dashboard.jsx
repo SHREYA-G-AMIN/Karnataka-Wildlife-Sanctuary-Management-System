@@ -9,6 +9,8 @@ function Dashboard() {
   const [park, setPark] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [programs, setPrograms] = useState([]);
+  const [programsLoading, setProgramsLoading] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -58,6 +60,53 @@ function Dashboard() {
   }, []);
 
   const selectedPark = parks.find((p) => p?.name === park) || parks[0];
+
+  // Fetch Conservation Programs when park changes
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchPrograms = async () => {
+      if (!selectedPark?.id) {
+        setPrograms([]);
+        return;
+      }
+
+      setProgramsLoading(true);
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/programs?sanctuary_id=${selectedPark.id}`);
+        const contentType = res.headers.get("content-type") || "";
+        if (!contentType.includes("application/json")) {
+          throw new Error("Invalid programs response format");
+        }
+        const data = await res.json();
+
+        if (!isMounted) return;
+
+        if (res.ok && data?.success) {
+          const list = Array.isArray(data?.data) ? data.data : [];
+          setPrograms(list);
+        } else {
+          setPrograms([]);
+        }
+      } catch (err) {
+        if (!isMounted) return;
+
+        console.log("Programs request failed:", err);
+        setPrograms([]);
+      } finally {
+        if (isMounted) {
+          setProgramsLoading(false);
+        }
+      }
+    };
+
+    fetchPrograms();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [selectedPark?.id]);
 
   return (
     <div className="dashboard-container">
@@ -162,6 +211,37 @@ function Dashboard() {
                 {item}
               </div>
             ))}
+        </div>
+
+        {/* CONSERVATION PROGRAMS */}
+        <div className="activity" style={{ marginTop: "25px" }}>
+          <h2>🌱 Conservation Programs</h2>
+
+          {programsLoading ? (
+            <div className="status-message">Loading programs...</div>
+          ) : programs.length === 0 ? (
+            <div className="status-message">No programs available for this sanctuary.</div>
+          ) : (
+            <div className="programs-list">
+              {programs.map((program) => (
+                <div key={program.id} className="program-card">
+                  <div className="program-header">
+                    <h3>{program.name}</h3>
+                    <span className={`program-status status-${program.status.toLowerCase()}`}>
+                      {program.status}
+                    </span>
+                  </div>
+                  <p className="program-date">
+                    📅 Started: {new Date(program.start_date).toLocaleDateString("en-IN", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric"
+                    })}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         
 
