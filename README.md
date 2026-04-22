@@ -8,6 +8,16 @@ A full-stack web application to manage and monitor wildlife data across Karnatak
 - Dashboard with dynamic park data (animals, species, endangered, poaching)
 - Animals page with filtering
 - Species gallery with images (DB-driven, no dummy data)
+- **Interactive Species Gallery**
+  - Users can click on any species card to view detailed information in a popup/modal
+  - **Species Details Included:**
+    - Description
+    - Habitat (Karnataka-specific)
+    - Conservation Status
+    - Fun Facts ("Did You Know?" section)
+  - **UI Enhancement:**
+    - Smooth modal popup with improved user interaction
+    - Makes the application more engaging and informative
 - Officers management
 - Health records tracking
 - Poaching incidents tracking
