@@ -10,7 +10,6 @@ router.get("/poaching", (req, res) => {
       pi.id AS incident_id,
       s.name AS sanctuary_name,
       pi.date,
-      pi.location,
       pi.animal_targeted,
       pi.description,
       pi.status
