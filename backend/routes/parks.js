@@ -9,13 +9,13 @@ router.get("/parks", (req, res) => {
       s.name,
       s.location,
       s.area,
-      COALESCE(p.famous, "Wildlife") AS famous,
-      COALESCE(p.image, "") AS image,
+      COALESCE(p.famous, 'Wildlife') AS famous,
+      COALESCE(p.image, '') AS image,
       COUNT(DISTINCT a.id) AS animals,
       COUNT(DISTINCT a.species_id) AS species,
       COUNT(DISTINCT CASE WHEN a.health_status <> 'Healthy' THEN a.id END) AS endangered,
       COUNT(DISTINCT pi.id) AS poaching,
-      COALESCE(p.activity, "[]") AS activity
+      COALESCE(p.activity, '[]') AS activity
     FROM Sanctuary s
     LEFT JOIN parks p
       ON LOWER(
