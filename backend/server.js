@@ -7,23 +7,7 @@ require("dotenv").config({ path: path.join(__dirname, ".env") });
 const app = express();
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-
-    // Allow localhost on common development ports
-    if (origin.startsWith('http://localhost:') || origin.startsWith('https://localhost:')) {
-      return callback(null, true);
-    }
-
-    // Allow the configured CLIENT_URL
-    const allowedOrigin = process.env.CLIENT_URL || "http://localhost:5173";
-    if (origin === allowedOrigin) {
-      return callback(null, true);
-    }
-
-    return callback(new Error('Not allowed by CORS'));
-  },
+   origin: true,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   credentials: true,
 };
