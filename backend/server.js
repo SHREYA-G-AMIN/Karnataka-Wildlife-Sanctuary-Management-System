@@ -50,7 +50,7 @@ const ensureHealthRecordsTable = () => {
           \`condition\` VARCHAR(120) NOT NULL,
           treatment VARCHAR(255) NOT NULL,
           vet_name VARCHAR(120) NOT NULL,
-          FOREIGN KEY (animal_id) REFERENCES animals(id)
+          FOREIGN KEY (animal_id) REFERENCES Animals(id)
         )
       `;
       db.query(createSql, (createErr) => {
